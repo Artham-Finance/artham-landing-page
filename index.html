@@ -194,12 +194,52 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    border: none;
+    cursor: pointer;
   }
 
   .btn-primary:hover {
     background: var(--accent-light);
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(197, 75, 42, 0.25);
+  }
+
+  .waitlist-form {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .waitlist-form input[type="email"] {
+    padding: 1rem 1.5rem;
+    border-radius: 100px;
+    border: 2px solid var(--border);
+    font-size: 1rem;
+    font-family: inherit;
+    width: 320px;
+    max-width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .waitlist-form input[type="email"]:focus {
+    border-color: var(--accent);
+  }
+
+  .waitlist-form .btn-primary {
+    font-size: 1.05rem;
+    padding: 1rem 2.5rem;
+  }
+
+  .waitlist-success {
+    display: none;
+    color: #2e7d32;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-top: 1rem;
   }
 
   .btn-secondary {
@@ -744,6 +784,8 @@
     .not-for { padding: 4rem 1.5rem; }
     .not-for-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     .final-cta { padding: 5rem 1.5rem; }
+    .waitlist-form { flex-direction: column; }
+    .waitlist-form input[type="email"] { width: 100%; }
     footer { padding: 2rem 1.5rem; }
     .dashboard-header { flex-direction: column; align-items: flex-start; }
     .dashboard-header p { text-align: left; }
@@ -960,10 +1002,40 @@
 <section class="final-cta" id="waitlist">
   <h2>Stop chasing your accountant for your own numbers</h2>
   <p>Artham is currently in early access. Drop your email and we'll get you in.</p>
-  <a href="/cdn-cgi/l/email-protection#1179747d7d7e5170636579707c3f787f2e6264737b7472652c5470637d68315072727462623143746064746265" class="btn-primary" style="font-size: 1.05rem; padding: 1.1rem 3rem;">
-    Request Early Access
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </a>
+  <form class="waitlist-form" id="waitlistForm">
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <button type="submit" class="btn-primary">
+      Request Early Access
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </form>
+  <p class="waitlist-success" id="waitlistSuccess">Thanks! We'll be in touch soon.</p>
+  <script>
+    document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var f = this;
+      var btn = f.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      var u = ['muthu', 'un-maze.com'].join('@');
+      fetch('https://formsubmit.co/ajax/' + u, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          email: f.email.value,
+          _subject: 'New Early Access Request - Artham'
+        })
+      }).then(function(r) { return r.json(); })
+      .then(function(data) {
+        f.style.display = 'none';
+        document.getElementById('waitlistSuccess').style.display = 'block';
+      }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Request Early Access';
+        alert('Something went wrong. Please try again.');
+      });
+    });
+  </script>
 </section>
 
 <!-- FOOTER -->
