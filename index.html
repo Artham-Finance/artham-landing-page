@@ -7,14 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0a0a0a;
-    --paper: #f5f0e8;
-    --accent: #c54b2a;
-    --accent-light: #e8714f;
-    --muted: #8a8278;
-    --card-bg: #eee8dc;
-    --card-border: #d9d1c3;
-    --white: #fefcf8;
+    --ink: #14110f;
+    --paper: #f6f7fb;
+    --accent: #243b6b;
+    --accent-light: #3d5fa0;
+    --muted: #6b635b;
+    --card-bg: #eef0f5;
+    --card-border: #d8dce6;
+    --white: #ffffff;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,7 +41,7 @@
     justify-content: space-between;
     align-items: center;
     backdrop-filter: blur(20px);
-    background: rgba(245, 240, 232, 0.85);
+    background: rgba(246, 247, 251, 0.85);
     border-bottom: 1px solid var(--card-border);
   }
 
@@ -119,7 +119,7 @@
     right: 0;
     width: 45%;
     height: 100%;
-    background: radial-gradient(ellipse at 80% 40%, rgba(197, 75, 42, 0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse at 80% 40%, rgba(36, 59, 107, 0.06) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -201,7 +201,7 @@
   .btn-primary:hover {
     background: var(--accent-light);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(197, 75, 42, 0.25);
+    box-shadow: 0 8px 30px rgba(36, 59, 107, 0.25);
   }
 
   .waitlist-form {
@@ -236,7 +236,7 @@
 
   .waitlist-success {
     display: none;
-    color: #2e7d32;
+    color: #0f6b4a;
     font-weight: 600;
     font-size: 1.05rem;
     margin-top: 1rem;
@@ -353,7 +353,7 @@
   .problem-left p {
     font-size: 1.05rem;
     line-height: 1.8;
-    color: rgba(245, 240, 232, 0.6);
+    color: rgba(246, 247, 251, 0.6);
     max-width: 420px;
   }
 
@@ -368,7 +368,7 @@
 
   .pain-card:hover {
     background: rgba(255,255,255,0.07);
-    border-color: rgba(197, 75, 42, 0.3);
+    border-color: rgba(36, 59, 107, 0.3);
     transform: translateX(4px);
   }
 
@@ -391,7 +391,7 @@
   .pain-card p {
     font-size: 0.9rem;
     line-height: 1.6;
-    color: rgba(245, 240, 232, 0.5);
+    color: rgba(246, 247, 251, 0.5);
   }
 
   /* ─── HOW IT WORKS ─── */
@@ -478,142 +478,6 @@
     color: var(--card-border);
   }
 
-  /* ─── WHAT YOU SEE ─── */
-  .dashboard-section {
-    padding: 6rem 3rem;
-    background: var(--card-bg);
-    border-top: 1px solid var(--card-border);
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  .dashboard-inner {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .dashboard-header h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-    letter-spacing: -0.02em;
-  }
-
-  .dashboard-header p {
-    color: var(--muted);
-    font-size: 0.95rem;
-    max-width: 340px;
-    text-align: right;
-  }
-
-  .dash-mock {
-    background: var(--white);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 80px rgba(0,0,0,0.05);
-  }
-
-  .dash-topbar {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--card-border);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .dash-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--card-border);
-  }
-
-  .dash-dot:first-child { background: #e74c3c; }
-  .dash-dot:nth-child(2) { background: #f1c40f; }
-  .dash-dot:nth-child(3) { background: #2ecc71; }
-
-  .dash-body {
-    padding: 2.5rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-  }
-
-  .dash-card {
-    background: var(--paper);
-    border: 1px solid var(--card-border);
-    border-radius: 14px;
-    padding: 1.5rem;
-  }
-
-  .dash-card-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-  }
-
-  .dash-card-value {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.8rem;
-    letter-spacing: -0.02em;
-  }
-
-  .dash-card-value.green { color: #2a9d5c; }
-  .dash-card-value.red { color: var(--accent); }
-
-  .dash-card-sub {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: 0.35rem;
-  }
-
-  .dash-table {
-    grid-column: 1 / -1;
-    margin-top: 0.5rem;
-  }
-
-  .dash-table-header {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
-  .dash-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    padding: 0.85rem 0;
-    border-bottom: 1px solid var(--card-border);
-    font-size: 0.85rem;
-    align-items: center;
-  }
-
-  .dash-row:last-child { border-bottom: none; }
-
-  .dash-row-name { font-weight: 600; }
-  .dash-row-status {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-  }
-
-  .status-paid { color: #2a9d5c; }
-  .status-pending { color: var(--accent); }
-  .status-overdue { color: #c0392b; }
-
   /* ─── NOT FOR YOU ─── */
   .not-for {
     padding: 6rem 3rem;
@@ -635,7 +499,7 @@
   }
 
   .not-for-col h3.red { color: var(--accent); }
-  .not-for-col h3.green { color: #2a9d5c; }
+  .not-for-col h3.green { color: #0f6b4a; }
 
   .not-for-item {
     padding: 0.85rem 0;
@@ -669,7 +533,7 @@
     width: 600px;
     height: 600px;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(197, 75, 42, 0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(36, 59, 107, 0.06) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -777,18 +641,13 @@
     .problem-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .how { padding: 4rem 1.5rem; }
     .steps { grid-template-columns: 1fr !important; }
-    .dashboard-section { padding: 4rem 1.5rem; }
-    .dash-body { grid-template-columns: repeat(2, 1fr); padding: 1.5rem; }
-    .dash-row { grid-template-columns: 1.5fr 1fr 1fr; }
-    .dash-row > :last-child { display: none; }
     .not-for { padding: 4rem 1.5rem; }
     .not-for-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     .final-cta { padding: 5rem 1.5rem; }
     .waitlist-form { flex-direction: column; }
     .waitlist-form input[type="email"] { width: 100%; }
     footer { padding: 2rem 1.5rem; }
-    .dashboard-header { flex-direction: column; align-items: flex-start; }
-    .dashboard-header p { text-align: left; }
+
   }
 </style>
 </head>
@@ -879,72 +738,6 @@
       <div class="step-icon">🎯</div>
       <h3>Track against your budget</h3>
       <p>Set a budget once. As bills come in — photographed, forwarded, or entered — spend updates automatically against each category. No month-end surprises. No "let me check with the accountant."</p>
-    </div>
-  </div>
-</section>
-
-<!-- DASHBOARD PREVIEW -->
-<section class="dashboard-section">
-  <div class="dashboard-inner">
-    <div class="dashboard-header">
-      <h2>What your screen looks like</h2>
-      <p>Not a chart of accounts. Not a trial balance. Just your business, in numbers that make sense.</p>
-    </div>
-    <div class="dash-mock">
-      <div class="dash-topbar">
-        <div class="dash-dot"></div>
-        <div class="dash-dot"></div>
-        <div class="dash-dot"></div>
-      </div>
-      <div class="dash-body">
-        <div class="dash-card">
-          <div class="dash-card-label">Cash in Bank</div>
-          <div class="dash-card-value green">₹18.4L</div>
-          <div class="dash-card-sub">Updated today</div>
-        </div>
-        <div class="dash-card">
-          <div class="dash-card-label">People Owe You</div>
-          <div class="dash-card-value">₹12.7L</div>
-          <div class="dash-card-sub">8 invoices pending</div>
-        </div>
-        <div class="dash-card">
-          <div class="dash-card-label">You Owe</div>
-          <div class="dash-card-value red">₹6.2L</div>
-          <div class="dash-card-sub">5 bills due</div>
-        </div>
-        <div class="dash-card">
-          <div class="dash-card-label">Budget Used</div>
-          <div class="dash-card-value" style="color: #b8860b;">67%</div>
-          <div class="dash-card-sub">₹14.1L of ₹21L spent</div>
-        </div>
-        <div class="dash-table">
-          <div class="dash-table-header">Recent activity</div>
-          <div class="dash-row">
-            <span class="dash-row-name">Vishal Supplies — Raw Materials</span>
-            <span>₹1,24,800</span>
-            <span class="dash-row-status status-paid">PAID</span>
-            <span style="color: var(--muted);">Apr 10</span>
-          </div>
-          <div class="dash-row">
-            <span class="dash-row-name">Acme Corp — Project Alpha</span>
-            <span>₹3,50,000</span>
-            <span class="dash-row-status status-pending">PENDING</span>
-            <span style="color: var(--muted);">Due Apr 20</span>
-          </div>
-          <div class="dash-row">
-            <span class="dash-row-name">WeWork — Office Rent</span>
-            <span>₹1,82,000</span>
-            <span class="dash-row-status status-overdue">OVERDUE</span>
-            <span style="color: var(--muted);">Due Apr 05</span>
-          </div>
-          <div class="dash-row">
-            <span class="dash-row-name">Priya Design — UI Sprint</span>
-            <span>₹75,000</span>
-            <span class="dash-row-status status-paid">PAID</span>
-            <span style="color: var(--muted);">Apr 08</span>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1040,4 +833,13 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><img src="
+  <div class="footer-links">
+    <a href="#how">How it works</a>
+    <a href="#waitlist">Get Early Access</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Artham. Built for founders, by founders.</div>
+</footer>
+</body>
+</html>
