@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Artham — Product in action</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+  :root {
+    --bone: #efeae0;
+    --bone-2: #e8e2d4;
+    --cream: #f5f1e7;
+    --cream-card: #f0ead7;
+    --paper: #ffffff;
+    --paper-soft: #fbf8f1;
+    --navy: #1b2a48;
+    --navy-soft: #243556;
+    --ink: #14110c;
+    --ink-2: #2a2620;
+    --mute: #837e74;
+    --mute-2: #aea99e;
+    --rule: #e3ddcf;
+    --rule-soft: #ece6d7;
+    --green: #1f6e3a;
+    --green-deep: #145128;
+    --green-soft: #e4eddf;
+    --red: #9c3a2c;
+    --red-deep: #7a2a1f;
+    --red-soft: #f3e2dc;
+    --blue-pill: #d9e3f1;
+    --blue-pill-ink: #1b3c70;
+    --amber-pill: #ecdfb6;
+    --amber-pill-ink: #6b521a;
+    --gray-pill: #e2ddd1;
+    --gray-pill-ink: #5a554a;
+    --row-hl: #e7e0c8;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bone);
+    color: var(--ink);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 96px 40px 140px;
+  }
+
+  /* --- Section header (matches the existing "What your screen looks like" lockup) --- */
+  .section-head {
+    margin-bottom: 56px;
+    max-width: 1280px;
+  }
+  .section-head h2 {
+    font-family: "Source Serif 4", serif;
+    font-weight: 700;
+    font-size: 84px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .section-head .kicker {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin: 0 0 22px;
+  }
+  .section-head .subtitle {
+    font-family: "Inter", sans-serif;
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    max-width: 640px;
+    margin: 28px 0 0;
+  }
+
+  /* --- Section + spacing rhythm --- */
+  section + section { margin-top: 140px; }
+
+  /* ============== BROWSER FRAME ============== */
+  .browser {
+    background: var(--paper);
+    border-radius: 18px;
+    box-shadow:
+      0 1px 0 rgba(20, 17, 12, 0.04),
+      0 20px 60px -30px rgba(20, 17, 12, 0.25),
+      0 50px 120px -60px rgba(20, 17, 12, 0.35);
+    overflow: hidden;
+    border: 1px solid rgba(20, 17, 12, 0.04);
+  }
+  .browser-chrome {
+    height: 44px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    background: var(--paper);
+  }
+  .traffic { display: flex; gap: 8px; }
+  .traffic span {
+    width: 12px; height: 12px; border-radius: 50%;
+    display: inline-block;
+  }
+  .traffic .r { background: #ed6a5e; }
+  .traffic .y { background: #f5bf4f; }
+  .traffic .g { background: #62c554; }
+
+  /* ============== WEB APP ============== */
+  .app {
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 14px;
+  }
+
+  .app-nav {
+    background: var(--navy);
+    color: #f3efe5;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 4px;
+    min-width: 0;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 9px;
+    padding-right: 10px;
+    flex-shrink: 0;
+  }
+  .brand-mark {
+    width: 30px; height: 30px;
+    background: #f3efe5;
+    color: var(--navy);
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-family: "Source Serif 4", serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+  .brand-word {
+    font-family: "Source Serif 4", serif;
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: 0.005em;
+  }
+  .app-nav nav {
+    display: flex; align-items: center; gap: 2px;
+    margin-left: 2px;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .app-nav nav a {
+    color: #f3efe5;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 9px;
+    border-radius: 7px;
+    display: inline-flex; align-items: center; gap: 4px;
+    white-space: nowrap;
+  }
+  .app-nav nav a.active {
+    background: #f0ead7;
+    color: var(--navy);
+  }
+  .app-nav nav a .caret {
+    width: 8px; height: 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    margin-top: -3px; opacity: 0.7;
+  }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .nav-search {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #d6d1c4;
+    border-radius: 8px;
+    padding: 6px 10px 6px 28px;
+    font-size: 12px;
+    width: 130px;
+    position: relative;
+    display: flex; align-items: center;
+    white-space: nowrap;
+  }
+  .nav-search svg { position: absolute; left: 12px; opacity: 0.7; }
+  .nav-search span { opacity: 0.7; }
+  .org-pick {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.04);
+    padding: 6px 9px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .org-pick .chev {
+    display: inline-flex; flex-direction: column; gap: 1px;
+  }
+  .org-pick .chev::before,
+  .org-pick .chev::after {
+    content: "";
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+  .org-pick .chev::before { border-bottom: 4px solid #d6d1c4; }
+  .org-pick .chev::after { border-top: 4px solid #d6d1c4; }
+  .bell {
+    width: 30px; height: 30px;
+    display: grid; place-items: center;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.05);
+    flex-shrink: 0;
+  }
+
+  /* App body */
+  .app-body { padding: 36px 40px 0; }
+
+  .page-title {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 8px;
+  }
+  .page-title h1 {
+    font-family: "Source Serif 4", serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .page-title .updated {
+    font-size: 13px;
+    color: var(--mute);
+  }
+  .page-lead {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    max-width: 520px;
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+
+  /* Filters row */
+  .filters {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.2fr 0.9fr 0.9fr auto auto;
+    gap: 12px;
+    margin-bottom: 14px;
+    align-items: end;
+  }
+  .field {
+    display: flex; flex-direction: column;
+    gap: 4px;
+  }
+  .field label {
+    font-size: 11px;
+    color: var(--mute);
+    padding-left: 14px;
+  }
+  .field .input {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    height: 44px;
+    padding: 0 14px;
+    display: flex; align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .field .input.with-icon { padding-left: 12px; }
+  .field .input .placeholder { color: var(--mute-2); }
+  .field .input .chev-down {
+    margin-left: auto;
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--ink-2);
+    opacity: 0.6;
+  }
+  .btn-fetch {
+    height: 44px;
+    padding: 0 26px;
+    background: var(--navy);
+    color: #f3efe5;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    border: 0;
+    cursor: pointer;
+  }
+  .btn-clear {
+    height: 44px;
+    padding: 0 14px;
+    background: transparent;
+    color: var(--ink-2);
+    border: 0;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  /* Approved only checkbox */
+  .approved-row {
+    display: flex; align-items: center; gap: 8px;
+    margin: 6px 0 26px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .approved-row .box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--mute-2);
+    border-radius: 4px;
+    background: var(--paper);
+  }
+
+  /* SHOW ME tabs */
+  .show-me {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .show-me .label {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-right: 4px;
+  }
+  .show-me .pill {
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .show-me .pill.active {
+    background: var(--paper);
+    box-shadow: 0 1px 0 rgba(20,17,12,0.04), 0 2px 10px -4px rgba(20,17,12,0.08);
+    border: 1px solid var(--rule);
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* KPI strip */
+  .kpi {
+    background: var(--cream-card);
+    border-radius: 14px;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 36px;
+    align-items: stretch;
+  }
+  .kpi .lens-info h4 {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .kpi .lens-info p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    max-width: 240px;
+    line-height: 1.4;
+  }
+  .kpi .stat .lbl {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .kpi .stat .val {
+    font-family: "Source Serif 4", serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .kpi .stat .val.zero { color: var(--mute); }
+
+  /* Activity table */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .table thead th {
+    text-align: left;
+    padding: 14px 12px 18px;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    vertical-align: top;
+    border-bottom: 1px solid var(--rule);
+  }
+  .table thead th .sub {
+    display: block;
+    font-weight: 400;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--mute);
+    margin-top: 4px;
+  }
+  .table thead .col-inv,
+  .table thead .col-rcp { color: var(--green); }
+  .table thead .col-bill,
+  .table thead .col-pay { color: var(--red); }
+  .table thead .col-run { color: var(--red-deep); }
+
+  .table tbody td {
+    padding: 18px 12px;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+  }
+  .table .col-date {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    white-space: nowrap;
+    width: 90px;
+  }
+  .table .col-acc, .table .col-ref { font-size: 13.5px; color: var(--ink); }
+  .table .ref-sub {
+    display: block;
+    color: var(--mute);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .table .amt {
+    font-family: "Source Serif 4", serif;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    text-align: left;
+  }
+  .table .amt.green { color: var(--green); }
+  .table .amt.red { color: var(--red); }
+  .table .amt.muted { color: var(--mute-2); }
+
+  .table .row-opening td {
+    background: var(--row-hl);
+  }
+  .table .row-opening td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  .table .row-opening td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border: 1px solid transparent;
+  }
+  .status-pill.opening { background: var(--blue-pill); color: var(--blue-pill-ink); border-color: rgba(27,60,112,0.15); }
+  .status-pill.approved { background: var(--blue-pill); color: var(--blue-pill-ink); border-color: rgba(27,60,112,0.15); }
+  .status-pill.draft { background: var(--gray-pill); color: var(--gray-pill-ink); border-color: rgba(90,85,74,0.15); }
+  .status-pill.review { background: var(--amber-pill); color: var(--amber-pill-ink); border-color: rgba(107,82,26,0.15); }
+
+  /* ============== MOBILE PHONES ============== */
+  .phones-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+    justify-items: center;
+    padding: 32px 80px 8px;
+  }
+
+  .phone {
+    width: 360px;
+    height: 738px;
+    background: #efe9dc;
+    border-radius: 48px;
+    padding: 12px;
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.06),
+      0 30px 60px -30px rgba(20,17,12,0.35),
+      0 60px 100px -50px rgba(20,17,12,0.35),
+      inset 0 0 0 1px rgba(20,17,12,0.05);
+    position: relative;
+  }
+  .phone .screen {
+    width: 100%; height: 100%;
+    background: var(--cream);
+    border-radius: 38px;
+    overflow: hidden;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+
+  /* Status bar */
+  .ios-status {
+    height: 50px;
+    background: var(--navy);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 26px 0;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+  }
+  .ios-status .time { width: 60px; }
+  .ios-status .island {
+    position: absolute;
+    left: 50%; top: 11px;
+    transform: translateX(-50%);
+    width: 110px; height: 30px;
+    background: #000;
+    border-radius: 20px;
+  }
+  .ios-status .signals {
+    display: flex; align-items: center; gap: 6px;
+    width: 60px; justify-content: flex-end;
+  }
+  .bars {
+    display: flex; align-items: flex-end; gap: 2px;
+  }
+  .bars i {
+    width: 3px; background: #fff; border-radius: 1px; display: block;
+  }
+  .bars i:nth-child(1) { height: 5px; }
+  .bars i:nth-child(2) { height: 7px; }
+  .bars i:nth-child(3) { height: 9px; }
+  .bars i:nth-child(4) { height: 11px; }
+  .wifi { width: 16px; height: 11px; position: relative; }
+  .battery {
+    width: 26px; height: 12px;
+    border: 1.2px solid #fff; border-radius: 3px;
+    position: relative; padding: 1.5px;
+  }
+  .battery::after {
+    content: ""; position: absolute;
+    right: -3px; top: 3px; height: 6px; width: 2px;
+    background: #fff; border-radius: 1px;
+  }
+  .battery .fill { background: #fff; height: 100%; width: 90%; border-radius: 1px; }
+
+  /* App header (mobile) */
+  .m-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 10px 22px 22px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    align-items: center;
+  }
+  .m-brand {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .m-brand-mark {
+    width: 30px; height: 30px;
+    background: #f3efe5;
+    color: var(--navy);
+    border-radius: 7px;
+    display: grid; place-items: center;
+    font-family: "Source Serif 4", serif;
+    font-weight: 700;
+    font-size: 17px;
+  }
+  .m-brand-word {
+    font-family: "Source Serif 4", serif;
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .m-title {
+    text-align: center;
+  }
+  .m-title .t1 {
+    font-family: "Source Serif 4", serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.05;
+  }
+  .m-title .t2 {
+    font-size: 11.5px;
+    opacity: 0.78;
+    margin-top: 2px;
+  }
+  .m-iconbtn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.10);
+    display: grid; place-items: center;
+  }
+
+  .m-filters {
+    display: flex; gap: 8px;
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--cream);
+  }
+  .chip {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 6px 12px 6px 14px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chip::after {
+    content: "";
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--ink-2);
+    opacity: 0.7;
+  }
+
+  .m-scroll {
+    flex: 1;
+    overflow: hidden;
+    padding: 14px 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .m-card {
+    background: var(--paper);
+    border-radius: 14px;
+    border: 1px solid var(--rule);
+    padding: 18px 18px;
+  }
+
+  /* Cash & bank row */
+  .cash-row {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .cash-icon {
+    width: 42px; height: 42px;
+    background: var(--cream-card);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+  .cash-lbl .k {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .cash-lbl .sub {
+    font-size: 11px;
+    color: var(--mute);
+    margin-top: 4px;
+  }
+  .cash-lbl .sub strong { color: var(--ink-2); font-weight: 600; }
+  .cash-amt {
+    margin-left: auto;
+    font-family: "Source Serif 4", serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cash-amt .chev {
+    width: 8px; height: 8px;
+    border-right: 1.5px solid var(--ink-2);
+    border-top: 1.5px solid var(--ink-2);
+    transform: rotate(45deg);
+    opacity: 0.4;
+  }
+
+  .duo {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .duo .m-card {
+    padding: 16px 16px 16px;
+  }
+  .duo .k {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+  .duo .v {
+    font-family: "Source Serif 4", serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 8px 0 6px;
+  }
+  .duo .v.green { color: var(--green); }
+  .duo .v.red { color: var(--red); }
+  .duo .see {
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+  .duo .see::after {
+    content: " ›";
+    color: var(--mute);
+  }
+
+  .stat-card .k {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+    font-weight: 600;
+    text-align: center;
+  }
+  .stat-card .v {
+    font-family: "Source Serif 4", serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 6px 0 14px;
+    text-align: center;
+  }
+  .stat-card .v.green { color: var(--green); }
+  .stat-card .split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .stat-card .split .box {
+    border: 1px solid;
+    border-radius: 9px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .stat-card .split .box.green { border-color: rgba(31,110,58,0.32); background: rgba(31,110,58,0.04); }
+  .stat-card .split .box.red { border-color: rgba(156,58,44,0.32); background: rgba(156,58,44,0.04); }
+  .stat-card .split .box .lbl {
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+  .stat-card .split .box .num {
+    font-family: "Source Serif 4", serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .stat-card .split .box.green .num { color: var(--green); }
+  .stat-card .split .box.red .num { color: var(--red); }
+
+  /* Bottom tab bar */
+  .tabbar {
+    position: absolute;
+    bottom: 12px; left: 12px; right: 12px;
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+    border-radius: 0 0 38px 38px;
+    height: 78px;
+    padding: 10px 6px 18px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+  }
+  .tab {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    font-size: 11px; color: var(--mute);
+    position: relative;
+  }
+  .tab.active { color: #1a5db8; font-weight: 600; }
+  .tab .ic {
+    width: 24px; height: 24px;
+    color: currentColor;
+  }
+  .badge {
+    position: absolute;
+    top: -4px; right: 12px;
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+  }
+  .home-ind {
+    position: absolute;
+    bottom: 6px; left: 50%;
+    transform: translateX(-50%);
+    width: 134px; height: 4px;
+    background: var(--ink);
+    border-radius: 999px;
+    opacity: 0.85;
+  }
+
+  /* Expenses screen specifics */
+  .total-card {
+    border: 1.5px solid var(--red);
+    background: var(--red-soft);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .total-card .k {
+    font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--red-deep);
+    font-weight: 600;
+  }
+  .total-card .v {
+    font-family: "Source Serif 4", serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--red);
+    letter-spacing: -0.01em;
+    margin: 6px 0 4px;
+  }
+  .total-card .sub {
+    font-size: 12.5px; color: var(--ink-2);
+  }
+
+  .filter-pills {
+    display: flex; gap: 6px; flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 -18px;
+    padding: 0 18px;
+  }
+  .filter-pills::-webkit-scrollbar { display: none; }
+  .fpill {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--ink-2);
+    display: inline-flex; align-items: center; gap: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .fpill.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .fpill .ct {
+    font-weight: 600;
+  }
+  .fpill .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    display: inline-block;
+  }
+  .fpill .dot.green { background: var(--green); }
+  .fpill .dot.amber { background: #b88a1f; }
+  .fpill .dot.gray { background: var(--mute); }
+
+  .trans-label {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+    font-weight: 600;
+    margin: 4px 2px 2px;
+  }
+
+  .trans-list {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .trans-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    padding: 14px 14px;
+    border-bottom: 1px solid var(--rule-soft);
+    align-items: flex-start;
+  }
+  .trans-row:last-child { border-bottom: 0; }
+  .bill-tag {
+    background: var(--red-soft);
+    color: var(--red);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 5px 8px;
+    border-radius: 6px;
+    line-height: 1;
+  }
+  .trans-row .name {
+    font-size: 14px; font-weight: 600; color: var(--ink);
+    line-height: 1.25;
+  }
+  .trans-row .meta {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11.5px; color: var(--mute);
+    margin-top: 2px;
+  }
+  .trans-row .status {
+    margin-top: 6px;
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--amber-pill);
+    color: var(--amber-pill-ink);
+    padding: 3px 8px; border-radius: 999px;
+    font-size: 11px; font-weight: 500;
+  }
+  .trans-row .status .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #b88a1f;
+  }
+  .trans-row .status.draft {
+    background: var(--gray-pill); color: var(--gray-pill-ink);
+  }
+  .trans-row .status.draft .dot { background: var(--gray-pill-ink); }
+  .trans-row .amt {
+    font-family: "Source Serif 4", serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--red);
+    white-space: nowrap;
+  }
+
+  .fab {
+    position: absolute;
+    right: 22px; bottom: 100px;
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 22px 14px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 12px 30px -10px rgba(27,42,72,0.55);
+  }
+  .fab .plus {
+    font-family: "Source Serif 4", serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1;
+    margin-top: -2px;
+  }
+
+  /* Footnote under phones */
+  .phone-caption {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 13px;
+    color: var(--mute);
+    margin-top: 28px;
+  }
+
+  /* Tighter on narrow viewports — single phone column */
+  @media (max-width: 1000px) {
+    .section-head h2 { font-size: 52px; }
+    .phones-wrap { grid-template-columns: 1fr; padding: 24px 20px; }
+    .page { padding: 56px 24px 80px; }
+    .filters { grid-template-columns: 1fr 1fr; }
+    .kpi { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <!-- ============== SECTION 1 — DESKTOP WEB APP ============== -->
+  <section data-screen-label="01 Web app">
+    <div class="section-head">
+      <p class="kicker">The dashboard, lifted from the product</p>
+      <h2>What your screen actually looks like.</h2>
+      <p class="subtitle">Not a chart of accounts. Not a trial balance. Every invoice you raised, every payment you made — pick a lens and the numbers re-arrange themselves.</p>
+    </div>
+
+    <div class="browser" role="img" aria-label="Artham web dashboard">
+      <div class="browser-chrome">
+        <div class="traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+      </div>
+      <div class="app">
+
+        <!-- Top nav -->
+        <div class="app-nav">
+          <div class="brand">
+            <div class="brand-mark">அ</div>
+            <div class="brand-word">Artham</div>
+          </div>
+          <nav>
+            <a class="active" href="#">Dashboard</a>
+            <a href="#">Parties</a>
+            <a href="#">Bills</a>
+            <a href="#">Invoices</a>
+            <a href="#">Payments</a>
+            <a href="#">Receipts</a>
+            <a href="#">Reports <span class="caret"></span></a>
+            <a href="#">Settings <span class="caret"></span></a>
+            <a href="#">Organization <span class="caret"></span></a>
+          </nav>
+          <div class="nav-right">
+            <div class="nav-search">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" stroke-linecap="round" /></svg>
+              <span>Search parties, bills…</span>
+            </div>
+            <div class="org-pick">
+              Nilgiri Exports Pvt Ltd
+              <span class="chev"></span>
+            </div>
+            <div class="bell">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d6d1c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="app-body">
+
+          <div class="page-title">
+            <h1>Nilgiri Exports Pvt Ltd</h1>
+            <span class="updated">updated upto 14 May 2026</span>
+          </div>
+          <p class="page-lead">Every invoice you raised, every payment you made, in one place. Pick a lens to see the view you need.</p>
+
+          <!-- Filters -->
+          <div class="filters">
+            <div class="field">
+              <div class="input with-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg>
+                <span class="placeholder">Search party, ref…</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>Branch</label>
+              <div class="input"><span>Chennai</span><span class="chev-down"></span></div>
+            </div>
+            <div class="field">
+              <label>Project</label>
+              <div class="input"><span>Accounting Services</span><span class="chev-down"></span></div>
+            </div>
+            <div class="field">
+              <label>From Date</label>
+              <div class="input"><span>01/05/2026</span></div>
+            </div>
+            <div class="field">
+              <label>To Date</label>
+              <div class="input"><span>24/05/2026</span></div>
+            </div>
+            <button class="btn-fetch">Fetch</button>
+            <button class="btn-clear">Clear</button>
+          </div>
+
+          <div class="approved-row">
+            <div class="box"></div>
+            Approved only
+          </div>
+
+          <!-- SHOW ME tabs -->
+          <div class="show-me">
+            <span class="label">Show me</span>
+            <span class="pill active">All activity</span>
+            <span class="pill">Profitability</span>
+            <span class="pill">Cash &amp; Bank</span>
+            <span class="pill">What customers owe</span>
+            <span class="pill">What you owe vendors</span>
+          </div>
+
+          <!-- KPI strip -->
+          <div class="kpi">
+            <div class="lens-info">
+              <h4>All activity</h4>
+              <p>All transactions visible. Pick a lens above to focus.</p>
+            </div>
+            <div class="stat">
+              <div class="lbl">Invoiced</div>
+              <div class="val">1,82,500.00</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Received</div>
+              <div class="val">64,800.00</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Billed</div>
+              <div class="val">92,000.00</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Paid</div>
+              <div class="val">42,432.00</div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date ↑</th>
+                <th>Account</th>
+                <th>Reference</th>
+                <th>Status</th>
+                <th class="col-inv">Invoices<span class="sub">to customers</span></th>
+                <th class="col-rcp">Receipts<span class="sub">from customers</span></th>
+                <th class="col-bill">Vendor Bills<span class="sub">from vendors</span></th>
+                <th class="col-pay">Payments<span class="sub">to vendors</span></th>
+                <th class="col-run">Running<span class="sub">net position · Trade only</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-opening">
+                <td class="col-date">01 May</td>
+                <td><span class="status-pill opening">Opening</span></td>
+                <td class="col-ref">Opening Balance</td>
+                <td></td>
+                <td class="amt green">59,400.00</td>
+                <td class="amt muted">—</td>
+                <td class="amt muted">—</td>
+                <td class="amt muted">—</td>
+                <td class="amt green">59,400.00</td>
+              </tr>
+              <tr>
+                <td class="col-date">10 May<br />2026</td>
+                <td class="col-acc">Meridian Logistics</td>
+                <td class="col-ref">BILL-ML-2201<span class="ref-sub">Freight · GST 18%</span></td>
+                <td><span class="status-pill review">Under review</span></td>
+                <td class="amt muted">—</td>
+                <td class="amt muted">—</td>
+                <td class="amt red">92,000.00</td>
+                <td class="amt muted">—</td>
+                <td class="amt red">−32,600.00</td>
+              </tr>
+              <tr>
+                <td class="col-date">12 May<br />2026</td>
+                <td class="col-acc">Saraswati Traders</td>
+                <td class="col-ref">INV-2026-0418<span class="ref-sub">Project Alpha · Chennai</span></td>
+                <td><span class="status-pill approved">Approved</span></td>
+                <td class="amt green">1,82,500.00</td>
+                <td class="amt muted">—</td>
+                <td class="amt muted">—</td>
+                <td class="amt muted">—</td>
+                <td class="amt green">1,49,900.00</td>
+              </tr>
+              <tr>
+                <td class="col-date">13 May<br />2026</td>
+                <td class="col-acc">S3919295</td>
+                <td class="col-ref">S3919295<span class="ref-sub">From: ICICI Bank · 404205000002</span></td>
+                <td><span class="status-pill draft">Draft</span></td>
+                <td class="amt muted">—</td>
+                <td class="amt muted">—</td>
+                <td class="amt muted">—</td>
+                <td class="amt red">42,432.00</td>
+                <td class="amt green">1,07,468.00</td>
+              </tr>
+              <tr>
+                <td class="col-date">14 May<br />2026</td>
+                <td class="col-acc">Finuda Information Techn…</td>
+                <td class="col-ref">RCP-1779464304183-8<span class="ref-sub">To: ICICI Bank · 404205000002</span></td>
+                <td><span class="status-pill approved">Approved</span></td>
+                <td class="amt muted">—</td>
+                <td class="amt green">64,800.00</td>
+                <td class="amt muted">—</td>
+                <td class="amt muted">—</td>
+                <td class="amt green">1,72,268.00</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SECTION 2 — MOBILE APP ============== -->
+  <section data-screen-label="02 Mobile app">
+    <div class="section-head">
+      <p class="kicker">Auto-classified. Human-approved.</p>
+      <h2>Artham sorts the books. You just tap approve.</h2>
+      <p class="subtitle">Artham sorts every bill. You tap approve. From anywhere.</p>
+    </div>
+
+    <div class="phones-wrap">
+
+      <!-- PHONE 1 — DASHBOARD -->
+      <div class="phone" aria-label="Mobile dashboard">
+        <div class="screen">
+
+          <div class="ios-status">
+            <div class="time">9:41</div>
+            <div class="island"></div>
+            <div class="signals">
+              <div class="bars"><i></i><i></i><i></i><i></i></div>
+              <svg class="wifi" viewBox="0 0 20 14" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><path d="M1 5.5C3.5 3 6.5 1.5 10 1.5s6.5 1.5 9 4"/><path d="M4 8.5C5.7 6.8 7.8 5.7 10 5.7s4.3 1.1 6 2.8"/><path d="M7 11.5c.9-.9 1.9-1.4 3-1.4s2.1.5 3 1.4"/></svg>
+              <div class="battery"><div class="fill"></div></div>
+            </div>
+          </div>
+
+          <div class="m-header">
+            <div class="m-brand">
+              <div class="m-brand-mark">அ</div>
+              <div class="m-brand-word">Artham</div>
+            </div>
+            <div class="m-title">
+              <div class="t1">Books</div>
+              <div class="t2">Artham Textiles Pvt. Ltd.</div>
+            </div>
+            <div class="m-iconbtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+
+          <div class="m-filters">
+            <div class="chip">This FY</div>
+            <div class="chip">All branches</div>
+            <div class="chip">All projects</div>
+          </div>
+
+          <div class="m-scroll">
+
+            <div class="m-card">
+              <div class="cash-row">
+                <div class="cash-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4l9 6"/><path d="M5 10v8"/><path d="M9 10v8"/><path d="M15 10v8"/><path d="M19 10v8"/><path d="M3 20h18"/></svg>
+                </div>
+                <div class="cash-lbl">
+                  <div class="k">Cash &amp; bank<br />balance</div>
+                  <div class="sub">Across <strong>2</strong> accounts</div>
+                </div>
+                <div class="cash-amt">15,45,000.00<span class="chev"></span></div>
+              </div>
+            </div>
+
+            <div class="duo">
+              <div class="m-card">
+                <div class="k">Customers owe</div>
+                <div class="v green">₹5,19,000</div>
+                <div class="see">See who</div>
+              </div>
+              <div class="m-card">
+                <div class="k">You owe vendors</div>
+                <div class="v red">₹4,62,000</div>
+                <div class="see">See who</div>
+              </div>
+            </div>
+
+            <div class="m-card stat-card">
+              <div class="k">Accrued profit this period</div>
+              <div class="v green">+3,95,000.00</div>
+              <div class="split">
+                <div class="box green">
+                  <div class="lbl">Invoices</div>
+                  <div class="num">₹11,29,000</div>
+                </div>
+                <div class="box red">
+                  <div class="lbl">Expenses</div>
+                  <div class="num">₹7,34,000</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="m-card stat-card">
+              <div class="k">Net cash this period</div>
+              <div class="v green">+3,38,000.00</div>
+              <div class="split">
+                <div class="box green">
+                  <div class="lbl">Received</div>
+                  <div class="num">₹6,10,000</div>
+                </div>
+                <div class="box red">
+                  <div class="lbl">Paid</div>
+                  <div class="num">₹2,72,000</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="tabbar">
+            <div class="tab active">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h10a4 4 0 0 1 4 4v14H6a2 2 0 0 1-2-2z"/><path d="M8 7h8"/><path d="M8 11h8"/></svg>
+              Dashboard
+            </div>
+            <div class="tab">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 14h4"/></svg>
+              Review
+              <span class="badge">3</span>
+            </div>
+            <div class="tab">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.4 7.2L4 21l1.8-5.6A8 8 0 1 1 21 12z"/></svg>
+              Chat
+              <span class="badge">3</span>
+            </div>
+            <div class="tab">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="m4.2 4.2 2.1 2.1"/><path d="m17.7 17.7 2.1 2.1"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="m4.2 19.8 2.1-2.1"/><path d="m17.7 6.3 2.1-2.1"/></svg>
+              Settings
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+
+      <!-- PHONE 2 — EXPENSES -->
+      <div class="phone" aria-label="Mobile expenses">
+        <div class="screen">
+
+          <div class="ios-status">
+            <div class="time">9:41</div>
+            <div class="island"></div>
+            <div class="signals">
+              <div class="bars"><i></i><i></i><i></i><i></i></div>
+              <svg class="wifi" viewBox="0 0 20 14" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><path d="M1 5.5C3.5 3 6.5 1.5 10 1.5s6.5 1.5 9 4"/><path d="M4 8.5C5.7 6.8 7.8 5.7 10 5.7s4.3 1.1 6 2.8"/><path d="M7 11.5c.9-.9 1.9-1.4 3-1.4s2.1.5 3 1.4"/></svg>
+              <div class="battery"><div class="fill"></div></div>
+            </div>
+          </div>
+
+          <div class="m-header">
+            <div class="m-iconbtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <div class="m-title">
+              <div class="t1">Expenses</div>
+              <div class="t2">6 transactions</div>
+            </div>
+            <div class="m-iconbtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+
+          <div class="m-filters">
+            <div class="chip">This FY</div>
+            <div class="chip">All branches</div>
+            <div class="chip">All projects</div>
+          </div>
+
+          <div class="m-scroll" style="gap: 16px;">
+
+            <div class="total-card">
+              <div class="k">Total expenses</div>
+              <div class="v">7,34,000.00</div>
+              <div class="sub">This FY</div>
+            </div>
+
+            <div class="filter-pills">
+              <div class="fpill active">All <span class="ct">6</span></div>
+              <div class="fpill"><span class="dot green"></span>Approved <span class="ct">4</span></div>
+              <div class="fpill"><span class="dot amber"></span>Review <span class="ct">1</span></div>
+              <div class="fpill"><span class="dot gray"></span>Drafts <span class="ct">1</span></div>
+            </div>
+
+            <div class="trans-label">Transactions</div>
+
+            <div class="trans-list">
+              <div class="trans-row">
+                <span class="bill-tag">BILL</span>
+                <div>
+                  <div class="name">Meridian Logistics</div>
+                  <div class="meta">18 Apr 2026 · BILL-ML-2201</div>
+                  <div class="status"><span class="dot"></span>Under review</div>
+                </div>
+                <div class="amt">₹92,000</div>
+              </div>
+              <div class="trans-row">
+                <span class="bill-tag">BILL</span>
+                <div>
+                  <div class="name">Saraswati Traders</div>
+                  <div class="meta">10 Apr 2026 · BILL-SV-1120</div>
+                </div>
+                <div class="amt">₹62,000</div>
+              </div>
+              <div class="trans-row">
+                <span class="bill-tag">BILL</span>
+                <div>
+                  <div class="name">Nandi Printworks</div>
+                  <div class="meta">02 Apr 2026 · BILL-NP-0088</div>
+                  <div class="status draft"><span class="dot"></span>Draft</div>
+                </div>
+                <div class="amt">₹44,000</div>
+              </div>
+              <div class="trans-row">
+                <span class="bill-tag">BILL</span>
+                <div>
+                  <div class="name">Saraswati Traders</div>
+                  <div class="meta">18 Mar 2026 · BILL-SV-1098</div>
+                </div>
+                <div class="amt">₹1,64,000</div>
+              </div>
+              <div class="trans-row">
+                <span class="bill-tag">BILL</span>
+                <div>
+                  <div class="name">Meridian Logistics</div>
+                  <div class="meta">28 Feb 2026 · BILL-ML-2174</div>
+                </div>
+                <div class="amt">₹1,40,000</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="fab"><span class="plus">+</span> New bill</div>
+
+          <div class="tabbar">
+            <div class="tab active">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h10a4 4 0 0 1 4 4v14H6a2 2 0 0 1-2-2z"/><path d="M8 7h8"/><path d="M8 11h8"/></svg>
+              Dashboard
+            </div>
+            <div class="tab">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 14h4"/></svg>
+              Review
+              <span class="badge">3</span>
+            </div>
+            <div class="tab">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.4 7.2L4 21l1.8-5.6A8 8 0 1 1 21 12z"/></svg>
+              Chat
+              <span class="badge">3</span>
+            </div>
+            <div class="tab">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="m4.2 4.2 2.1 2.1"/><path d="m17.7 17.7 2.1 2.1"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="m4.2 19.8 2.1-2.1"/><path d="m17.7 6.3 2.1-2.1"/></svg>
+              Settings
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+
+      <div class="phone-caption">Available on iOS &amp; Android · syncs in real time with the web</div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
